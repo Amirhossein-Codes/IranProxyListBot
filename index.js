@@ -1,5 +1,13 @@
 const TelegramBot = require("node-telegram-bot-api");
+const http = require("http");
 
+const port = process.env.PORT || 3000;
+
+http.createServer((req, res) => {
+  res.end("Bot is running!");
+}).listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+});
 const token = process.env.BOT_TOKEN;
 const bot = new TelegramBot(token, { polling: true });
 
@@ -71,3 +79,4 @@ bot.on("message", (msg) => {
         sendProxies(msg.chat.id);
     }
 });
+
