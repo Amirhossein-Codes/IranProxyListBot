@@ -80,3 +80,18 @@ bot.on("message", (msg) => {
     }
 });
 
+/* -----------------------------
+   جلوگیری از Sleep شدن Render
+------------------------------ */
+
+const https = require("https");
+
+const SELF_URL = "https://iranproxylistbot.onrender.com/";
+
+setInterval(() => {
+    https.get(SELF_URL, (res) => {
+        console.log("Self ping sent:", res.statusCode);
+    }).on("error", (err) => {
+        console.log("Self ping error:", err.message);
+    });
+}, 5 * 60 * 1000); // هر 5 دقیقه
